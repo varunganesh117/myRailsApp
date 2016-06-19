@@ -16,8 +16,20 @@ module SessionsHelper
         end
     end
     
+    def store_location
+        session[:location] = request.url
+    end
+
+    def redirect_back_or (default)
+        redirect_to session[:location] || default
+    end
+
     def logged_in?
         !current_user.nil?
+    end
+
+    def current_user?(user)
+        user == current_user
     end
     
     def log_out
